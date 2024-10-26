@@ -13,14 +13,10 @@ import javafx.stage.Stage;
 
 public class CatFin extends Application {
     
-    //private DAOmanager daoManager;
-    
-    
-    
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //daoManager =new DAOmanager();
+        
         
         primaryStage.setOnCloseRequest(e->{
             e.consume();
@@ -33,7 +29,7 @@ public class CatFin extends Application {
         //initializing homeScene
         LoginScene loginScene = new LoginScene(primaryStage);
         //HomeScene homeScene = new HomeScene(primaryStage,daoManager);
-        //TransactionsScene transactionsScene = new TransactionsScene(primaryStage, daoManager);
+        ////TransactionsScene transactionsScene = new TransactionsScene(primaryStage, daoManager);
         primaryStage.setScene(loginScene.getScene());
         primaryStage.show();
     }

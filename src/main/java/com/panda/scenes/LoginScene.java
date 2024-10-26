@@ -20,19 +20,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-//import javafx.scene.control.Alert.AlertType;
-//import com.panda.utils.AlertUtils;
-//import javafx.scene.control.Alert;
-
-
 public class LoginScene {
     private Scene loginScene;
     private Stage primaryStage;
-    //private DAOmanager daoManager;
+    private DAOManager daoManager;
+    private UserDAO userDAO;
 
     public LoginScene(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        //this.daoManager = daoManager;
+        this.daoManager = new DAOManager();
+        this.userDAO = new UserDAO();
         initLoginScene();
     }
 
@@ -55,13 +52,13 @@ public class LoginScene {
         Button loginButton = new Button("Login");
         Button signUpButton = new Button("Sign Up");
         // signUpButton.setStyle("-fx-background-color: #439fe0;\r\n" + //
-        //                 "    -fx-text-fill: white;")
-;
+        // " -fx-text-fill: white;")
+        ;
         loginButton.setOnAction(e -> {
             try {
-                handleLogin(emailField.getText(), passwordField.getText());} 
-            catch (Exception er) {
-                AlertBox.show( "Error", "Invalid username or password");
+                handleLogin(emailField.getText(), passwordField.getText());
+            } catch (Exception er) {
+                AlertBox.show("Error", "Invalid username or password");
                 er.printStackTrace();
             }
         });
@@ -83,19 +80,21 @@ public class LoginScene {
 
     private void handleLogin(String email, String password) throws SQLException {
         if (email.isEmpty() || password.isEmpty()) {
-            //AlertUtils.showAlert(Alert.AlertType.ERROR, "Error", "Please enter both email and password");
+            // AlertUtils.showAlert(Alert.AlertType.ERROR, "Error", "Please enter both email
+            // and password");
             AlertBox.show("Error", "Please enter both email and password");
             return;
         }
-        UserDAO userDAO = new UserDAO();
+
+        // UserDAO userDAO = new UserDAO();
         User user = userDAO.getUserByEmailAndPassword(email, password);
         if (user != null) {
             SessionManager.startSession(user.getId());
-            DAOManager daoManager = new DAOManager();
+            // DAOManager daoManager = new DAOManager();
             HomeScene homeScene = new HomeScene(primaryStage, daoManager);
             primaryStage.setScene(homeScene.getScene());
         } else {
-            AlertBox.show( "Login Failed", "Please click sign Up to create a new account");
+            AlertBox.show("Login Failed", "Please click sign Up to create a new account");
         }
     }
 }

@@ -183,7 +183,7 @@ public class TransactionsScene {
         loadCategories();
         loadTransactions();
         Button deleteBtn = new Button("Delete All Transactions");
-        deleteBtn.setStyle("-fx-background-color: #ff0000;");
+        deleteBtn.setStyle("-fx-background-color: #f44336;");
         deleteBtn.setAlignment(Pos.CENTER);
         deleteBtn.setOnAction(e -> {
             boolean result = ConfirmBox.display("Delete All Transactions",

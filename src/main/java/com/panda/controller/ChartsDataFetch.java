@@ -13,7 +13,7 @@ import com.panda.utils.DatabaseConnection;
 
 public class ChartsDataFetch {
     private Connection connection;
-    int userID = SessionManager.getCurrentSession().getUserId();
+    
 
     public ChartsDataFetch(){
         this.connection=DatabaseConnection.getConnection();
@@ -25,6 +25,7 @@ public class ChartsDataFetch {
     // from budget table, return the amount for each and the category name referenced by its category_id foreign key
     public Map<String, Double> getBudgetData () throws Exception{
         Map<String, Double> budgetData = new HashMap<>();
+        int userID = SessionManager.getCurrentSession().getUserId();
         //get category name and budget amount by joining cat and budget by foreign key using user id
         String query = "SELECT c.name, b.amount " +
                         "FROM budget b " +
@@ -50,6 +51,7 @@ public class ChartsDataFetch {
     //from tacsactions table, select all that have type=expense, group by category id and return the category name which is in a categories table and sum of amount for items with the same category id
     public Map <String, Double> getExpenseData() throws Exception{
         Map<String,Double> expenseData =new HashMap<>();
+        int userID = SessionManager.getCurrentSession().getUserId();
         //get category name and sum of amount for items with the same category id 
         String query = "SELECT c.name, SUM(t.amount) AS total_amount FROM transactions t JOIN categories c ON t.category_id = c.id "+
                         "WHERE t.type = 'expense' AND user_id = " +userID +" GROUP BY t.category_id;";
@@ -91,6 +93,7 @@ public class ChartsDataFetch {
 
     public Map<String, String> getTransactionInsights() throws Exception {
         Map<String, String> transactionInsights = new HashMap<>();
+        int userID = SessionManager.getCurrentSession().getUserId();
         String query = "SELECT c.name, SUM(t.amount) AS total_amount " +
                         "FROM transactions t " +
                         "JOIN categories c ON t.category_id = c.id " +

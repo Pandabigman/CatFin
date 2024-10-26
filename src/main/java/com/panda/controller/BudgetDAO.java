@@ -12,7 +12,7 @@ import com.panda.utils.DatabaseConnection;
 
 public class BudgetDAO {
     private Connection connection;
-    int userId = SessionManager.getCurrentSession().getUserId();
+    
     
     public BudgetDAO() {
         this.connection = DatabaseConnection.getConnection();
@@ -37,7 +37,7 @@ public class BudgetDAO {
     public Budget getUserBudgetByCatId(int categoryId) throws SQLException {
         String query = "SELECT * FROM budget WHERE category_id =? AND user_id =?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            
+            int userId = SessionManager.getCurrentSession().getUserId();
             statement.setInt(1, categoryId);
             statement.setInt(2, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -64,7 +64,7 @@ public class BudgetDAO {
     public void insertUserBudget( Budget budget) throws SQLException {
         String query = "INSERT INTO budget (amount, category_id, user_id) VALUES (?,?,?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            
+            int userId = SessionManager.getCurrentSession().getUserId();
             statement.setInt(1, userId);
             statement.setDouble(2, budget.getAmount());
             statement.setInt(3, budget.getCategoryId());
@@ -84,7 +84,7 @@ public class BudgetDAO {
     public void updateUserBudget( Budget budget) throws SQLException {
         String query = "UPDATE budget SET amount =? WHERE user_id =? AND category_id =?";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
-            
+            int userId = SessionManager.getCurrentSession().getUserId();
             statement.setDouble(1, budget.getAmount());
             statement.setInt(2, userId);
             statement.setInt(3, budget.getCategoryId());
@@ -140,7 +140,7 @@ public class BudgetDAO {
         String sql = "SELECT * FROM budget WHERE user_id =?";
         List<Budget> budgets = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            //int userId = SessionManager.getCurrentSession().getUserId();
+            int userId = SessionManager.getCurrentSession().getUserId();
             stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {

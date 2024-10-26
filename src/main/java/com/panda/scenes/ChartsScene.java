@@ -53,7 +53,7 @@ public class ChartsScene {
         Button uploadButton = new Button("Upload ");
 
         // navBar.setPadding(new Insets(10, 10, 50, 10));
-        navBar.getChildren().addAll(homeButton, recordButton, transactionsButton, budgetButton, tipsButton, refreshBtn);
+        navBar.getChildren().addAll(homeButton, recordButton, transactionsButton, budgetButton, tipsButton, refreshBtn, uploadButton);
         navBar.setAlignment(Pos.CENTER);
         navBar.setId("nav");
         // Navigation Button Actions

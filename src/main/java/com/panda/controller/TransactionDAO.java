@@ -13,7 +13,7 @@ import com.panda.utils.DatabaseConnection;
 
 public class TransactionDAO {
     private Connection connection;
-    int userID = SessionManager.getCurrentSession().getUserId(); // Get the current user's ID from the session manager
+    //Double totalSpend;
 
     public TransactionDAO() {
         // Use the DatabaseConnection class to get the connection
@@ -23,12 +23,13 @@ public class TransactionDAO {
     public void addTransaction(Transaction transaction) throws SQLException {
         String sql = "INSERT INTO transactions (description, amount, date, category_id,type,user_id) VALUES (?, ?, ?,?, ?,?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            int userId = SessionManager.getCurrentSession().getUserId();  // Get the current user's ID from the session manager
             stmt.setString(1, transaction.getDescription());
             stmt.setDouble(2, transaction.getAmount());
             stmt.setDate(3, new java.sql.Date(transaction.getDate().getTime()));
             stmt.setInt(4, transaction.getCategoryId());
             stmt.setString(5, transaction.getType());
-            stmt.setInt(6, userID);
+            stmt.setInt(6, userId);
             stmt.executeUpdate();
         }
         // update user balance
@@ -46,8 +47,8 @@ public class TransactionDAO {
         String sql = "SELECT * FROM transactions WHERE user_id =?";
         List<Transaction> transactions = new ArrayList<>();
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-        
-            stmt.setInt(1, userID);
+            int userId = SessionManager.getCurrentSession().getUserId();
+            stmt.setInt(1, userId);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -68,8 +69,8 @@ public class TransactionDAO {
     public Double getUserCategorySpend( int category_Id) throws SQLException {
         String sql =" SELECT sum(amount) FROM transactions WHERE user_id = ? AND category_id =? AND type = 'expense'";
         try(PreparedStatement stmt = connection.prepareStatement(sql)){
-            
-            stmt.setInt(1, userID);
+            int userId = SessionManager.getCurrentSession().getUserId();
+            stmt.setInt(1, userId);
             stmt.setInt(2, category_Id);
             ResultSet rs = stmt.executeQuery();
             
@@ -83,9 +84,9 @@ public class TransactionDAO {
     public void deleteTransaction(Transaction tx) throws SQLException {
         String sql = "DELETE FROM transactions WHERE id = ? AND user_id = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            
+            int userId = SessionManager.getCurrentSession().getUserId();
             stmt.setInt(1, tx.getId());
-            stmt.setInt(2, userID);
+            stmt.setInt(2, userId);
             stmt.executeUpdate();
         }
         // update user balance
@@ -119,14 +120,13 @@ public class TransactionDAO {
 
     public void deleteAllTransactions() throws SQLException {
         String sql = "DELETE FROM transactions where userId = ?";
-        
+        int userId = SessionManager.getCurrentSession().getUserId();
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setInt(1, userID);
+            statement.setInt(1, userId);
             statement.executeUpdate();
         }
         // update user balance
         UserDAO userDAO = new UserDAO();
         userDAO.setBalance(0);
     }
-    
 }
