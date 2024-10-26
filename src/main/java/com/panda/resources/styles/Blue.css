@@ -1,0 +1,80 @@
+/* tomorrow-night-blue.css */
+
+/* General Scene background */
+.root {
+    -fx-background-color: #002451;  /* Dark blue background */
+    -fx-text-fill: #ffffff; /* Default text color */
+}
+
+/* Labels */
+.label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+}
+
+/* Buttons */
+.button {
+    background-color: #c9e2e4; /* Added standard property */
+    -fx-background-color: #1d3b53; /* Existing property */
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px; /* Fixed standard property */
+}
+
+
+
+.button:hover {
+    -fx-background-color: #7285b7; /* Light blue on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #1d3b53; /* Darker blue when pressed */
+}
+
+/* Active navigation button */
+.nav-button-active {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #002451; /* Dark blue text */
+}
+
+/* TextFields */
+.text-field {
+    -fx-background-color: #001b33;
+    -fx-text-fill: #ffffff;
+    -fx-border-color: #0e3c58;
+}
+
+/* TableView styling */
+.table-view {
+    -fx-background-color: #001b33;
+    -fx-text-background-color: #ffffff;
+    -fx-border-color: #0e3c58;
+}
+
+.table-view .column-header {
+    -fx-text-fill: #141212; /* Text color for header */
+    -fx-font-weight: bold; /* Make the text bold */
+}
+.table-view .column-header-background {
+    -fx-background-color: #003f8e;
+}
+
+/* Column header when hovered */
+.table-view .column-header:hover {
+    -fx-background-color: #0044cc; /* Change background color on hover */
+    -fx-text-fill: #ffffff;
+}
+
+.table-view .table-row-cell:filled {
+    -fx-background-color: #001b33;
+    -fx-text-fill: #ffffff;
+}
+/* chart cstom styles */
+.chart-legend {
+    -fx-text-fill: #161212; /* Change this to your desired color */
+    -fx-font-size: 14px; /* You can adjust the font size as needed */
+}
+/* Tooltips */
+.tooltip {
+    -fx-background-color: #003f8e;
+    -fx-text-fill: #ffffff;
+}

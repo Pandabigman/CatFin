@@ -1,0 +1,185 @@
+.root {
+    -fx-background-color: #0e2433;  /* Dark Teal */
+    /* -fx-text-fill: #e0e0e0; Default text color */
+}
+
+/* Labels */
+.label {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+}
+
+/* Buttons */
+.button {
+    background-color: #1e656d; /* Added standard property */
+    -fx-background-color: #1e656d; /* Existing property */
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px; /* Fixed standard property */
+}
+
+
+
+.button:hover {
+    -fx-background-color: #3b8b94; /* Light blue on hover */
+}
+
+.button:pressed {
+    -fx-background-color: #1a4146; /* Darker blue when pressed */
+}
+
+/* Active navigation button */
+#nav .button{
+    -fx-background-color: #ffffff; /* White background */
+    -fx-text-fill: #1e656d; /* Teal/green text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-color: #1e656d; /* Add a border to match the text */
+    -fx-border-width: 2px;
+    -fx-padding: 5 15 5 15; 
+}
+#nav .button:hover{
+    -fx-background-color: #1e656d; /* Teal/green background on hover */
+    -fx-text-fill: #ffffff; /* White text on hover */
+}
+#nav .button:pressed{
+    -fx-background-color: #278082; /* Slightly darker teal when pressed */
+    -fx-text-fill: #ffffff;
+}
+#active{
+    -fx-background-color: #1e656d; /* Teal/green background */
+    -fx-text-fill: #ffffff; /* White text */
+    -fx-font-weight: bold;
+}
+
+/* Custom styling for submit button */
+#submit-button {
+    -fx-background-color: #ffffff; /* White background */
+    -fx-text-fill: #1e656d; /* Teal/green text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-color: #1e656d; /* Add a border to match the text */
+    -fx-border-width: 2px;
+    -fx-padding: 5 15 5 15; /* Padding for a better button appearance */
+}
+
+/* Hover effect for submit button */
+#submit-button:hover {
+    -fx-background-color: #1e656d; /* Teal/green background on hover */
+    -fx-text-fill: #ffffff; /* White text on hover */
+}
+
+/* Pressed effect for submit button */
+#submit-button:pressed {
+    -fx-background-color: #278082; /* Slightly darker teal when pressed */
+    -fx-text-fill: #ffffff;
+}
+
+/* TextFields */
+.text-field {
+    -fx-background-color: #0a1b22;
+    -fx-text-fill: #e0e0e0;
+    -fx-border-color: #1e656d;
+}
+
+/* TableView styling */
+.table-view {
+    -fx-background-color: #0a2a2f; /* Dark teal background */
+    -fx-text-background-color: #e0f7f4; /* Light text color */
+    -fx-border-color: #1e656d; /* Border color in teal */
+}
+
+/* Column header styling */
+.table-view .column-header {
+    -fx-text-fill: #e0f7f4; /* Light text color for header */
+    -fx-font-weight: bold; /* Make the text bold */
+    -fx-alignment: CENTER_LEFT; /* Align the header text */
+}
+
+/* Column header background */
+.table-view .column-header-background {
+    -fx-background-color: #1e656d; /* Modern teal header background */
+}
+
+/* Column header when hovered */
+.table-view .column-header:hover {
+    -fx-background-color: #278082; /* Darker teal on hover */
+    -fx-text-fill: #ffffff; /* White text color on hover */
+}
+
+/* Row styling */
+.table-view .table-row-cell {
+    -fx-background-color: #0a2a2f; /* Dark teal row background */
+    -fx-text-fill: #e0f7f4; /* Light text color */
+}
+
+/* Alternating row colors */
+.table-view .table-row-cell:filled:nth-child(even) {
+    -fx-background-color: #113940; /* Slightly lighter teal for alternating rows */
+}
+
+/* Selected row styling */
+.table-view .table-row-cell:filled:selected {
+    -fx-background-color: #278082; /* Highlighted teal for selected row */
+    -fx-text-fill: #ffffff; /* White text for selected row */
+}
+
+/* Focused cell border */
+.table-view .table-cell:focused {
+    -fx-border-color: #ffffff; /* White border for focused cell */
+}
+
+/* Text alignment in cells */
+.table-view .table-cell {
+    -fx-alignment: CENTER_LEFT; /* Align text to the left for readability */
+}
+/* chart cstom styles */
+.chart-legend {
+    -fx-text-fill: #e0e0e0; /* Change this to your desired color */
+    -fx-font-size: 14px; /* You can adjust the font size as needed */
+}
+/* Tooltips */
+.tooltip {
+    -fx-background-color: #1e656d;
+    -fx-text-fill: #ffffff;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* ComboBox styling */
+.combo-box {
+    -fx-background-color: #ffffff; /* White background for the ComboBox */
+    -fx-text-fill: #1e656d; /* Teal/green text */
+    -fx-border-color: #1e656d; /* Teal border */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-padding: 5px 10px; /* Padding inside the ComboBox */
+}
+
+/* ComboBox hover styling */
+.combo-box:hover {
+    -fx-background-color: #71aca9; /* Different green background on hover */
+    -fx-text-fill: #ffffff; /* White text on hover */
+    -fx-border-color: #1e656d; /* Maintain teal border */
+}
+
+/* Dropdown styling */
+.combo-box .list-view {
+    -fx-background-color: #ffffff; /* White background for the dropdown */
+    -fx-border-color: #1e656d; /* Teal border */
+}
+
+/* List items in dropdown */
+.combo-box .list-view .list-cell {
+    -fx-background-color: #ffffff; /* White background for list items */
+    -fx-text-fill: #1e656d; /* Teal text for list items */
+}
+
+/* Hover effect for list items */
+.combo-box .list-view .list-cell:hover {
+    -fx-background-color: #71aca9; /* Different green background for hovered list item */
+    -fx-text-fill: #ffffff; /* White text for hovered list item */
+}
+
+/* Selected item in dropdown */
+.combo-box .list-view .list-cell:selected {
+    -fx-background-color: #1e656d; /* Teal background for selected item */
+    -fx-text-fill: #ffffff; /* White text for selected item */
+}

@@ -1,0 +1,41 @@
+/* CSS for Custom Alert Box */
+
+/* Root layout styling */
+.root {
+    -fx-background-color: #004d4d; /* Deep teal background */
+    -fx-padding: 20px;
+    -fx-border-color: #20b2aa; /* Light teal border to complement the theme */
+    -fx-border-width: 2px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+/* Label styling */
+.label {
+    -fx-text-fill: #ffffff; /* White text for readability */
+    -fx-font-size: 16px;
+    -fx-font-family: "Segoe UI", sans-serif; /* Modern font choice */
+}
+
+/* Button styling */
+.button {
+    -fx-background-color: #ff8c00; /* Vibrant orange background */
+    -fx-text-fill: #ffffff; /* White text for better contrast */
+    -fx-font-size: 14px;
+    -fx-font-family: "Segoe UI", sans-serif; /* Consistent font */
+    -fx-cursor: hand;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 16px;
+    -fx-border-color: #ff8c00; /* Border matching the button */
+    -fx-border-width: 1px;
+}
+
+/* Button hover effect */
+.button:hover {
+    -fx-background-color: #ffa726;
+}
+
+/* Button pressed effect */
+.button:pressed {
+    -fx-background-color: #e67600; /* Darker orange when pressed */
+}

@@ -1,0 +1,48 @@
+.root{
+    -fx-text-fill: #000000;
+}
+.chart {
+    -fx-background-color: #ffffff;
+}
+
+.chart-legend {
+    -fx-text-fill: #140404; /* Light Grey for legend text */
+    -fx-font-size: 14px;
+}
+
+.chart-series-line {
+    -fx-stroke: #1e656d; /* Teal line color for chart series */
+}
+
+.chart-tooltip {
+    -fx-background-color: #1e656d;
+    -fx-text-fill: #ffffff;
+}
+.button {
+    background-color: #1e656d; /* Added standard property */
+    -fx-background-color: #ffffff; /* Existing property */
+    -fx-text-fill: #1e656d;
+    -fx-font-size: 14px; /* Fixed standard property */
+}
+.label {
+    -fx-text-fill: #0e2433;     /*#e0aa14;*/
+    -fx-font-size: 14px;
+}
+/* Active navigation button */
+#nav .button{
+    -fx-background-color: #ffffff; /* White background */
+    -fx-text-fill: #1e656d; /* Teal/green text */
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-color: #1e656d; /* Add a border to match the text */
+    -fx-border-width: 2px;
+    -fx-padding: 5 15 5 15; 
+}
+#nav .button:hover{
+    -fx-background-color: #1e656d; /* Teal/green background on hover */
+    -fx-text-fill: #ffffff; /* White text on hover */
+}
+#nav .button:pressed{
+    -fx-background-color: #278082; /* Slightly darker teal when pressed */
+    -fx-text-fill: #ffffff;
+}
