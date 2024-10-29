@@ -37,9 +37,9 @@ public class TransactionDAO {
         double balance = userDAO.getBalance();
 
         if (transaction.getType() == "expense"){
-            balance += transaction.getAmount();
+            balance -= transaction.getAmount();
         } else {
-            balance -= transaction.getAmount();}
+            balance += transaction.getAmount();}
         userDAO.setBalance(balance);
     }
 
@@ -94,9 +94,9 @@ public class TransactionDAO {
         double balance = userDAO.getBalance();
         
         if (tx.getType() == "expense"){
-            balance -= tx.getAmount();
+            balance+= tx.getAmount();
         } else {
-            balance += tx.getAmount();}
+            balance -= tx.getAmount();}
             
         userDAO.setBalance(balance);
     }
