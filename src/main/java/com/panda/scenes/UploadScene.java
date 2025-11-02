@@ -12,8 +12,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
 
 import com.panda.controller.DAOManager;
 import com.panda.model.Transaction;
@@ -21,11 +19,10 @@ import com.panda.utils.AlertUtils;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 public class UploadScene {
@@ -34,12 +31,14 @@ public class UploadScene {
     private Scene uploadScene;
     private List<Transaction> transactions;
     private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("dd-MMM-yy");
-    private static final int DEFAULT_CATEGORY_ID = 7;
+    
+    private Extraction aiExtraction;
     
 
     public UploadScene(Stage primaryStage, DAOManager daoManager) {
         this.primaryStage = primaryStage;
         this.daoManager = daoManager;
+        this.aiExtraction= new Extraction();
         initUploadScene();
     }
 
@@ -139,88 +138,10 @@ public class UploadScene {
     }
 
     private List<Transaction> processPDF(File pdfFile) throws Exception {
-        List<Transaction> transactions = new ArrayList<>();
-
-        try (PDDocument document = PDDocument.load(pdfFile)) {
-            PDFTextStripper stripper = new PDFTextStripper();
-            String text = stripper.getText(document);
-
-            // Split text into lines for line-by-line processing
-            String[] lines = text.split("\\r?\\n");
-            boolean transactionsStarted = false;
-
-            for (String line : lines) {
-                // Skip lines until we find the transaction section
-                if (line.contains("Your Transaction")) {
-                    transactionsStarted = true;
-                    continue;
-                }
-
-                if (!transactionsStarted || line.trim().isEmpty() ||
-                        line.contains("STATEMENT") || line.contains("Balance")) {
-                    continue;
-                }
-
-                Transaction transaction = parseTransactionLine(line);
-                if (transaction != null) {
-                    transactions.add(transaction);
-                }
-            }
-        }
-
-        return transactions;
+        return aiExtraction.processPDF(pdfFile);
     }
 
-    //works in specific order - date/type/description/amountIn or out/ balance
-    private Transaction parseTransactionLine(String line) {
-        try {
-            // Split line by spaces while preserving quoted strings
-            String[] parts = line.trim().split("\\s+");
-            if (parts.length < 4)
-                return null; // Skip invalid lines
-
-            // Parse date
-            String dateStr = parts[0];
-            Date date = DATE_FORMATTER.parse(dateStr);
-
-            // Find amount and determine if it's money in or out
-            double amount = 0.0;
-            String transactionType = "expense";
-            StringBuilder description = new StringBuilder();
-
-            boolean foundAmount = false;
-            for (int i = 2; i < parts.length; i++) {
-                if (parts[i].matches("\\d+\\.\\d{2}")) {
-                    // Found amount
-                    amount = Double.parseDouble(parts[i]);
-                    foundAmount = true;
-
-                    // Check if this is in the "Money In" column
-                    if (i < parts.length - 1 && !parts[i + 1].matches("\\d+\\.\\d{2}")) {
-                        transactionType = "income";
-                    }
-                    break;
-                } else if (!foundAmount) {
-                    // Add to description until we find the amount
-                    if (description.length() > 0)
-                        description.append(" ");
-                    description.append(parts[i]);
-                }
-            }
-
-            return new Transaction(
-                    description.toString(),
-                    amount,
-                    date,
-                    DEFAULT_CATEGORY_ID,
-                    transactionType);
-
-        } catch (ParseException | NumberFormatException e) {
-            System.err.println("Error parsing line: " + line);
-            System.err.println("Error details: " + e.getMessage());
-            return null;
-        }
-    }
+    
 
     private void displayTransactions(List<Transaction> transactions, TextArea statusArea) {
         StringBuilder display = new StringBuilder();

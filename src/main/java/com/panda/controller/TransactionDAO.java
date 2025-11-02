@@ -119,7 +119,7 @@ public class TransactionDAO {
 // }
 
     public void deleteAllTransactions() throws SQLException {
-        String sql = "DELETE FROM transactions where userId = ?";
+        String sql = "DELETE FROM transactions where user_id = ?";
         int userId = SessionManager.getCurrentSession().getUserId();
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, userId);
